@@ -29,7 +29,7 @@ htmlcov
 *.pot
 
 # Pycharm
-.idea/*
+/.idea
 
 # Vim
 
@@ -51,4 +51,6 @@ media/
 
 
 
-staticfiles/
+/staticfiles/
+/static/compiled/
+/templates/react/

@@ -2,4 +2,4 @@ from django.views.generic import TemplateView
 
 
 class IndexView(TemplateView):
-    pass
+    template_name = "react/index.html"
