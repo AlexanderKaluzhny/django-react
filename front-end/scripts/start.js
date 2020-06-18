@@ -15,7 +15,7 @@ process.on('unhandledRejection', err => {
 require('../config/env');
 
 
-const fs = require('fs');
+const fs = require('fs-extra');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
@@ -181,6 +181,8 @@ checkBrowsers(paths.appPath, isInteractive)
     const appName = require(paths.appPackageJson).name;
     const useTypeScript = fs.existsSync(paths.appTsConfig);
     const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
+
+    fs.emptyDirSync(paths.appBuild);
 
     // Create a webpack compiler that is configured with custom messages.
     const compiler = createCompiler({
