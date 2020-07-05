@@ -318,11 +318,11 @@ module.exports = function(webpackEnv) {
           use: [
             {
               options: {
-                cache: true,
+                /* caching disabled as sometimes linter shows errors that are already fixed */
+                cache: false, 
                 formatter: require.resolve('react-dev-utils/eslintFormatter'),
                 eslintPath: require.resolve('eslint'),
                 resolvePluginsRelativeTo: __dirname,
-                
               },
               loader: require.resolve('eslint-loader'),
             },
