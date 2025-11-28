@@ -1,6 +1,6 @@
 # Vite Build Instructions
 
-This document provides detailed instructions for building the frontend using Vite.
+This document provides detailed instructions for building the frontend using Vite. Compiled by Claude Code.
 
 ## Prerequisites
 

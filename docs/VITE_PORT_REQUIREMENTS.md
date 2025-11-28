@@ -1,6 +1,6 @@
 # Vite Port Requirements - Complete Checklist
 
-This document outlines all requirements for porting the webpack-based build system to Vite for the Django-React integration project.
+This document outlines all requirements for porting the webpack-based build system to Vite for the Django-React integration project. Compiled by Claude Code. 
 
 **Based on analysis of 110 webpack features**
 
