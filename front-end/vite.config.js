@@ -136,7 +136,7 @@ export default defineConfig(({ mode }) => {
     // CSS preprocessing
     css: {
       // PostCSS configuration will be loaded from postcss.config.js
-      postcss: './postcss.config.js',
+      postcss: './postcss.config.cjs',
 
       // CSS Modules configuration
       modules: {

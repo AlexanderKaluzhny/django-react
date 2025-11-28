@@ -201,7 +201,7 @@ This document outlines all requirements for porting the webpack-based build syst
 }
 ```
 
-### 2. `postcss.config.js` - PostCSS configuration
+### 2. `postcss.config.cjs` - PostCSS configuration
 
 ```javascript
 {
@@ -379,7 +379,7 @@ Vite may require custom configuration to support `%PUBLIC_URL%` syntax.
 1. Configure SVG handling (vite-plugin-svgr)
 2. Configure image processing
 3. Setup CSS/SCSS processing
-4. Create `postcss.config.js`
+4. Create `postcss.config.cjs`
 5. Test all asset types
 
 ### Phase 3: Environment & Variables (Critical)
