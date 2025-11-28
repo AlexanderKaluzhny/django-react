@@ -6,15 +6,13 @@ Project sources consist of 2 parts:
 
 ## How to run it
 
-* clone the repo
-* `cd djsrc/` and init the virtualenv. For example using the *pipenv*
+* the project is using UV, please refer to [UV with Django](https://blog.pecar.me/uv-with-django#using-uv-to-create-a-new-django-project) for the guide on using UV with Django. 
+* `cd djsrc/` and init the virtualenv. 
 ```
-pipenv shell
+uv sync
 ```
-* install dependencies and run django dev server
 ```
-pip install -r requirements.txt
-./manage.py runserver
+uv run manage.py runserver
 ```
 Then open a separate terminal:
 ```
@@ -51,12 +49,7 @@ Django's `TemplateView` serves `index.html` to the browser, and the browser make
 
 This approach provides several benefits:
 * **No separate dev server needed:** Unlike typical Vite setups that run a dev server, this configuration builds static files that Django serves directly
-* **Simple Django integration:** No need for proxy configurations, CORS settings, or complex Django static files setup
-* **Fast builds:** Vite uses esbuild for transpilation, resulting in 40-75% faster builds compared to Webpack
-* **Watch mode for development:** `npm start` watches for file changes and automatically rebuilds (incremental builds are very fast - ~1-2 seconds)
-* **Full configuration control:** Clean and simple `vite.config.js` (187 lines) compared to complex webpack configs (697+ lines)
-* **Modern tooling:** Vite provides excellent developer experience with better error messages and faster feedback
-* **Smaller bundles:** Production builds are 85% smaller (146 KB vs 1 MB) thanks to better tree-shaking and optimization
+* **Simple Django integration:** No need for additional Django configuration and template tags
 
 ### Available Scripts
 
@@ -70,14 +63,11 @@ When you make changes to source files, Vite automatically detects them and rebui
 #### `npm run build`
 
 Builds the app for production. Places everything into the Django *static* folder. <br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
 The build is minified and the filenames include the hashes.<br />
 
 #### `npm run lint`
 
 Runs ESLint to check code quality and catch potential issues.
-Uses ESLint 9 with flat config format and React-specific rules.
 
 ## Learn More
 
@@ -97,4 +87,3 @@ Uses ESLint 9 with flat config format and React-specific rules.
 ### Project-Specific Documentation
 - See `VITE_BUILD_INSTRUCTIONS.md` for detailed build instructions
 - See `VITE_PORT_REQUIREMENTS.md` for migration requirements from Webpack
-- See `PR_DESCRIPTION.md` for complete migration details
