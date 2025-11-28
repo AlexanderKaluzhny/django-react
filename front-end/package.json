@@ -1,6 +1,6 @@
 {
-  "name": "cra-5",
-  "version": "0.1.0",
+  "name": "django-react",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "dependencies": {
