@@ -1,6 +1,6 @@
 # Vite Build Instructions
 
-This document provides detailed instructions for building the frontend using Vite. Compiled by Claude Code.
+This document provides detailed instructions for building the frontend using Vite.
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ npm run build
 
 **Generated files:**
 - Static assets → `djsrc/static/compiled/`
-- HTML template → `djsrc/templates/react/index.html`
+- HTML templates → `djsrc/templates/react/` (one per entry point)
 
 ---
 
@@ -60,7 +60,7 @@ npm start
 **What it does:**
 - Builds the frontend in **development mode**
 - Keeps code unminified for easier debugging
-- Generates detailed source maps
+- Generates hidden source maps (`.map` files on disk, no `sourceMappingURL` comments in output)
 - Faster to debug, slower to load
 
 ---
@@ -73,20 +73,23 @@ After running either build command, files are generated in the following structu
 djsrc/
 ├── static/compiled/                # Static assets served by Django
 │   ├── .vite/
-│   │   └── manifest.json          # Asset manifest for Django
+│   │   └── manifest.json          # Asset manifest (used by inject plugin)
 │   ├── js/
-│   │   ├── index.[hash].js        # JavaScript bundle
-│   │   └── index.[hash].js.map    # Source map
+│   │   ├── mainApp.[hash].js      # Main app entry bundle
+│   │   ├── demoMicroApp.[hash].js # Demo micro-app entry bundle
+│   │   ├── *.[hash].chunk.js      # Shared chunks
+│   │   └── *.[hash].js.map        # Source maps (hidden — no sourceMappingURL in JS)
 │   ├── css/
-│   │   └── index.[hash].css       # Extracted CSS
+│   │   └── mainApp.[hash].css     # Extracted CSS (per entry)
 │   ├── media/                      # Images and other assets (if any)
 │   ├── favicon.ico                 # Copied from public/
 │   ├── logo192.png                 # Copied from public/
 │   ├── logo512.png                 # Copied from public/
 │   ├── manifest.json               # Copied from public/
 │   └── robots.txt                  # Copied from public/
-└── templates/react/                # Django templates
-    └── index.html                  # Generated HTML with injected scripts
+└── templates/react/                # Django templates (processed by inject plugin)
+    ├── index.html                  # Main app — with injected <script>/<link> tags
+    └── demo.html                   # Demo micro-app — Django {{ page_title }} preserved
 ```
 
 ---
@@ -133,10 +136,11 @@ All build settings are configured in `front-end/vite.config.js`:
 |---------|-------|-------------|
 | **Base path** | `/static/compiled/` | Public URL path for assets |
 | **Output directory** | `../djsrc/static/compiled/` | Where static assets go |
-| **HTML output** | `../djsrc/templates/react/index.html` | Django template location |
+| **Template output** | `../djsrc/templates/react/` | Django templates (one per entry) |
+| **Entry points** | JS-only rollup inputs | `mainApp` + `demoMicroApp` |
 | **File naming** | `js/[name].[hash].js` | Cache-busting with content hash |
 | **Asset inline limit** | 10KB | Files smaller than 10KB are inlined |
-| **Source maps** | Enabled | Controlled by `GENERATE_SOURCEMAP` env var |
+| **Source maps** | `'hidden'` | `.map` files generated, no `sourceMappingURL` in output |
 | **Target** | ES2015 | Browser compatibility target |
 
 ---
@@ -183,4 +187,3 @@ Edit `front-end/vite.config.js` to customize:
 Refer to [Vite documentation](https://vitejs.dev/config/) for all options.
 
 ---
-
