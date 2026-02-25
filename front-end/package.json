@@ -40,7 +40,6 @@
     "postcss-normalize": "^13.0.1",
     "postcss-preset-env": "^10.4.0",
     "sass": "^1.94.0",
-    "vite": "^7.2.2",
-    "vite-plugin-svgr": "^4.5.0"
+    "vite": "^7.2.2"
   }
 }
